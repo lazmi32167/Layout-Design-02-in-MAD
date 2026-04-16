@@ -1,97 +1,55 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const BUCSE9());
+  runApp(const MyApp());
 }
 
-class BUCSE9 extends StatelessWidget {
-  const BUCSE9({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar:
-         AppBar(
-          title: Text("4th April 2026"),
-          backgroundColor: Colors.greenAccent,
-          centerTitle: true,
+      home: PhoneScreen(),
+    );
+  }
+}
 
-          leading: Icon(Icons.arrow_back),
-        ),
-        body: 
-        SafeArea(
-          child: Stack(
+class PhoneScreen extends StatelessWidget {
+  const PhoneScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF0F1E1E),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                color: Colors.white,
-                margin: EdgeInsetsDirectional.symmetric(horizontal: 0, vertical: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Expanded(
-                          flex: 6,
-                          child: Container(
-                             height:100,
-                            color: Colors.redAccent,
-                            child: Center(child: Text("22CSE004")),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                             height:100,
-                            color: Colors.greenAccent,
-                            child: Center(child: Text("AB+")),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: Container(
-                             height:100,
-                            color: Colors.blueAccent,
-                            child: Center(child: Text("Barishal")),
-                          ),
-                        ),
-                      ],
-                    ),
-                    
-                    const SizedBox(height: 120),
-
-                    Center(
-                      child: Container(
-                        height: 90,
-                        width: 200,
-                        decoration: const BoxDecoration(
-                          color: Colors.orange,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30),
-                            bottomRight: Radius.circular(30),
-                          ),
-                        ),
-                        child: const Center(child: Text("110-004-22")),
-                      ),
-                    ),
-                  ],
+              const Text(
+                "Secondary Numbers",
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
 
-              Positioned(
-                bottom: 20,
-                right: 20,
-                child: Container(
-                  height: 70,
-                  width: 70,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.purpleAccent,
-                  ),
-                  child: const Center(child: Text("Lazmi")),
-                ),
+              const SizedBox(height: 20),
+
+              phoneCard(
+                number: "+1 (555)987-6543",
+                label: "Home • Added 2mo ago",
+              ),
+
+              const SizedBox(height: 20),
+
+              phoneCard(
+                number: "+44(20)71234567",
+                label: "Work • Unverified",
               ),
             ],
           ),
@@ -99,4 +57,86 @@ class BUCSE9 extends StatelessWidget {
       ),
     );
   }
-} 
+
+  Widget phoneCard({
+    required String number,
+    required String label,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+
+        gradient: const LinearGradient(
+          colors: [
+            Color(0xFF1E3A3A),
+            Color(0xFF132828),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+
+        boxShadow: [
+          BoxShadow(
+            color: Colors.white.withOpacity(0.2),
+            blurRadius: 10,
+            spreadRadius: 1,
+          ),
+        ],
+      ),
+
+      child: Row(
+        children: [
+          Container(
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white.withOpacity(0.08),
+            ),
+            child: const Icon(
+              Icons.phone,
+              color: Colors.white70,
+            ),
+          ),
+
+          const SizedBox(width: 14),
+
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  number,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  label,
+                  style: const TextStyle(
+                    color: Colors.white54,
+                    fontSize: 13,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.edit, color: Colors.white70),
+          ),
+
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.delete, color: Colors.white70),
+          ),
+        ],
+      ),
+    );
+  }
+}
